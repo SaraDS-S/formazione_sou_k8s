@@ -1,0 +1,5 @@
+- name: Installazione podman
+  include_tasks: installazione-podman.yml
+
+##- name: Installazione Jenkins
+##  include_tasks: jenkins-master-install.yml

@@ -1,0 +1,21 @@
+    - name: Pull dell'immagine
+      ansible.builtin.command:
+        cmd: podman pull docker.io/jenkins/jenkins:latest
+      become: true
+      
+    - name: Copia file configurazione
+      ansible.builtin.template:
+        src: haproxy.cfg
+        dest: /etc/haproxy/haproxy.cfg
+    
+    - name: Creazione container HaProxy
+      containers.podman.podman_container:
+        name: haproxy
+        image: docker.io/library/haproxy
+        state: started
+        ports:
+          - "8080:8080"
+          - "8443:8443"
+        volumes:
+          - /etc/haproxy/:/usr/local/etc/haproxy/
+      become: true

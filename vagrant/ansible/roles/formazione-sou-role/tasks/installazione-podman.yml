@@ -1,0 +1,10 @@
+    - name: Installazione podman
+      ansible.builtin.dnf:
+        name: podman
+        state: present
+
+    - name: Controllo servizio podman attivo
+      ansible.builtin.systemd:
+        name: podman.socket
+        enabled: yes
+        state: started
